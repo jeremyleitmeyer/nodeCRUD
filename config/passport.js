@@ -1,17 +1,16 @@
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/user');
 
-var User = require('../models/user');
-
-module.exports = function (passport) {
+module.exports = (passport) => {
 
   // required for persistent login sessions
   // used to serialize the user for the session
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser( (user, done) => {
     done(null, user.id);
   });
   // used to deserialize the user
-  passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
       done(err, user);
     });
   });
@@ -20,33 +19,29 @@ module.exports = function (passport) {
       usernameField: 'email',
       passwordField: 'password',
       passReqToCallback: true // allows us to pass back the entire request to the callback
-    },
-    function (req, email, password, done) {
+    }, (req, email, password, done) => {
 
       // asynchronous
       // User.findOne wont fire unless data is sent back
-      process.nextTick(function () {
-
-        // we are checking to see if the user trying to login already exists
+      process.nextTick( () => {
         User.findOne({
           'local.email': email
-        }, function (err, user) {
+        }, (err, user) => {
           // if there are any errors, return the error
-          if (err)
+          if (err){
             return done(err);
-
+          }
           // check to see if theres already a user with that email
           if (user) {
             return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
           } else {
-
             // if there is no user with that email
             var newUser = new User();
 
             newUser.local.email = email;
             newUser.local.password = newUser.generateHash(password);
-
-            newUser.save(function (err) {
+            console.log(newUser.local)
+            newUser.save((err) => {
               if (err)
                 throw err;
               return done(null, newUser);
@@ -60,15 +55,13 @@ module.exports = function (passport) {
       usernameField: 'email',
       passwordField: 'password',
       passReqToCallback: true
-    },
-    function (req, email, password, done) {
+    }, (req, email, password, done) => {
 
       User.findOne({
         'local.email': email
-      }, function (err, user) {
+      }, (err, user) => {
         if (err)
           return done(err);
-
         // if no user is found, return the message
         if (!user)
           return done(null, false, req.flash('loginMessage', 'No user found.'));

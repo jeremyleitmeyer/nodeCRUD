@@ -1,11 +1,11 @@
-module.exports = function (app, passport) {
+module.exports = (app, passport) => {
 
-  app.get('/', function (req, res) {
+  app.get('/', (req, res) => {
     res.render('index.ejs');
   });
 
 
-  app.get('/login', function (req, res) {
+  app.get('/login', (req, res) => {
     res.render('login.ejs', {
       message: req.flash('loginMessage')
     });
@@ -19,7 +19,7 @@ module.exports = function (app, passport) {
   }));
 
 
-  app.get('/signup', function (req, res) {
+  app.get('/signup', (req, res) => {
 
     res.render('signup.ejs', {
       message: req.flash('signupMessage')
@@ -30,16 +30,18 @@ module.exports = function (app, passport) {
     successRedirect: '/profile', 
     failureRedirect: '/signup', 
     failureFlash: true 
-  }));
+  }),(req, res) =>{
+    console.log(req)
+  });
 
   //use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, function (req, res) {
+  app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.ejs', {
       user: req.user // get the user out of session and pass to template
     });
   });
 
-  app.get('/logout', function (req, res) {
+  app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
