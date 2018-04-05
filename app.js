@@ -35,7 +35,8 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
-require('./routes/routes.js')(app, passport);
+require('./routes/authRoutes.js')(app, passport);
+require('./routes/postRoutes.js')(app)
 
 var port = process.env.PORT || 3000;
 app.listen(port);
