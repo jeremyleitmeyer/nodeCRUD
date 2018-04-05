@@ -12,7 +12,9 @@ var session = require('express-session');
 
 var configDB = require('./config/database.js');
 
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(configDB.url,{
+  useMongoClient: true
+}); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -23,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 // required for passport
 app.use(session({
-  secret: 'testnodeblog'
+  secret: 'testnodeblog',
+  resave: true,
+  saveUninitialized: true
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
