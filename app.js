@@ -11,7 +11,7 @@ const session = require('express-session');
 
 const configDB = require('./config/database.json');
 
-mongoose.connect(configDB.MONGO_KEY, {
+mongoose.connect(process.env.MONGO_KEY, {
   useMongoClient: true
 }); 
 mongoose.connection.on('error', (err) => {
