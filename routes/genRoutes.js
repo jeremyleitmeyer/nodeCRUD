@@ -11,18 +11,12 @@ module.exports = (app) => {
   app.get('/profile', isLoggedIn, (req, res) => {
 
     var posts = Post.find({
-      'userId': req.user._id
+      'user.userId': req.user._id
     }, (err, posts) => {
-      if (!posts) {
-        res.render('profile.ejs', {
-          user: req.user
-        });
-      } else {
         res.render('profile.ejs', {
           user: req.user,
           posts: posts
         });
-      }
     });
   });
 
