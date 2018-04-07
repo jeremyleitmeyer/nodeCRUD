@@ -21,6 +21,7 @@ module.exports = (app) => {
   });
 
   app.get('/posts', isLoggedIn, (req, res) => {
+    console.log(req.params)
     var posts = Post.find({}, (err, posts) => {
       res.render('posts.ejs', {
         posts: posts
