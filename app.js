@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const configDB = require('./config/database.json');
-
 mongoose.connect(process.env.MONGO_KEY, {
   useMongoClient: true
 }); 
