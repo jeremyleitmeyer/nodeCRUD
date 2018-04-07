@@ -1,12 +1,15 @@
 var mongoose = require('mongoose');
 
 var postSchema = mongoose.Schema({
-
+    posted: { type: Date, default: Date.now },
     title: String,
     content: String,
+    user: {
+        userId: String,
+        email: String
+    },
     comments: Array
 });
-// pushes in user:text pair when comment submits
 
 
 module.exports = mongoose.model('Post', postSchema);

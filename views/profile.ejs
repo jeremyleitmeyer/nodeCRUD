@@ -1,33 +1,58 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <% include partials/head %>
+	<% include partials/head %>
 </head>
 <body>
+<header>
+    <% include partials/nav %>
+</header>
 <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+	<div class="page-header text-center">
+			<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<form action="/posts" method="post">
+				<div class="form-group">
+					<label>Title</label>
+					<input type="text" class="form-control" name="title">
+				</div>
+				<div class="form-group">
+					<label>Content</label>
+					<input type="text" class="form-control" name="content">
+				</div>
 
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-            </div>
-        </div>
-
-    </div>
+				<button type="submit" class="btn btn-warning btn-lg">Post</button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<hr>
+	<div class="row">
+		<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-user"></span> Local</h3>
+					<p>
+						<strong>id</strong>: <%= user._id %><br>
+						<strong>email</strong>: <%= user.local.email %><br>
+						<strong>password</strong>: <%= user.local.password %>
+					</p>
+				</div>
+		</div>
+	
+		<div class="col-sm-6 post-box">
+				<% posts.forEach(function(post){ %>
+					<div class="well">
+						<h4><%= post.posted.toLocaleDateString("en-US") %></h4>
+						<h3><%= post.title %></h3>
+						<p><%= post.content %></p>
+					</div>
+				<% }) %>
+		</div>
+	</div>
+	
 
 </div>
 </body>

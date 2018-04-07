@@ -13,30 +13,35 @@ const configDB = require('./config/database.json');
 
 mongoose.connect(configDB.MONGO_KEY, {
   useMongoClient: true
-}); // connect to our database
+}); 
 mongoose.connection.on('error', (err) => {
     console.error('MongoDB error: %s', err);
 });
 mongoose.set('debug', true);
 
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport);
 
+app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs');
+
 // required for passport
 app.use(session({
   secret: 'testnodeblog',
   resave: true,
   saveUninitialized: true
-})); // session secret
+}));
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
-require('./routes/routes.js')(app, passport);
+require('./routes/authRoutes.js')(app, passport);
+require('./routes/genRoutes.js')(app)
 
 var port = process.env.PORT || 3000;
 app.listen(port);
-console.log('The magic happens on port ' + port);
+console.log('listening on ' + port);

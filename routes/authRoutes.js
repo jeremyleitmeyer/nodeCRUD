@@ -1,8 +1,8 @@
+const User = require('../models/user');
+const Post = require('../models/post');
+
 module.exports = (app, passport) => {
 
-  app.get('/', (req, res) => {
-    res.render('index.ejs');
-  });
 
 
   app.get('/login', (req, res) => {
@@ -13,9 +13,9 @@ module.exports = (app, passport) => {
 
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/profile', 
-    failureRedirect: '/login', 
-    failureFlash: true 
+    successRedirect: '/posts',
+    failureRedirect: '/login',
+    failureFlash: true
   }));
 
 
@@ -27,18 +27,11 @@ module.exports = (app, passport) => {
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile', 
-    failureRedirect: '/signup', 
-    failureFlash: true 
-  }),(req, res) =>{
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }), (req, res) => {
     console.log(req)
-  });
-
-  //use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile.ejs', {
-      user: req.user // get the user out of session and pass to template
-    });
   });
 
   app.get('/logout', (req, res) => {
@@ -47,7 +40,6 @@ module.exports = (app, passport) => {
   });
 };
 
-// route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
