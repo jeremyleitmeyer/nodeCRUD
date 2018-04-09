@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-mongoose.connect('mongodb://jeremyleitmeyer:7A1s2d98@ds135619.mlab.com:35619/nodeblog', {
+mongoose.connect(process.env.MONGO_KEY, {
   useMongoClient: true
 }); 
 mongoose.connection.on('error', (err) => {
