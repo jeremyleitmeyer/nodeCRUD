@@ -13,10 +13,10 @@ module.exports = (app) => {
     var posts = Post.find({
       'user.userId': req.user._id
     }, (err, posts) => {
-        res.render('profile.ejs', {
-          user: req.user,
-          posts: posts
-        });
+      res.render('profile.ejs', {
+        user: req.user,
+        posts: posts
+      });
     });
   });
 
@@ -50,6 +50,16 @@ module.exports = (app) => {
         })
       });
     });
+  })
+
+  app.post('/posts/delete', (req, res) => {
+    Post.remove({
+      '_id': req.body.postId
+    }, (err) => {
+      if (err)
+        return err
+      res.redirect('/profile')
+    })
   })
 }
 
