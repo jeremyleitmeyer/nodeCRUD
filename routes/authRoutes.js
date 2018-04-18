@@ -6,8 +6,8 @@ module.exports = (app, passport) => {
 
 
   app.get('/login', (req, res) => {
-    res.render('login.ejs', {
-      message: req.flash('loginMessage')
+    res.render('login.pug', {
+      messages: req.flash('loginMessage')
     });
   });
 

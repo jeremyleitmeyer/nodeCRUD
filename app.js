@@ -3,13 +3,13 @@ const app = express();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
-
+const pug = require('pug');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-mongoose.connect(process.env.MONGO_KEY, {
+mongoose.connect('mongodb://jeremyleitmeyer:7A1s2d98@ds135619.mlab.com:35619/nodeblog', {
   useMongoClient: true
 }); 
 mongoose.connection.on('error', (err) => {
@@ -24,7 +24,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 // required for passport
 app.use(session({

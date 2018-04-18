@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+	head
+		include includes/head
+	body
+		header
+			include includes/nav
+		div(class='container')
+			div(class='jumbotron text-center')
+				h1
+					span(class='fa fa-lock') The Node Blog
+				p Login or Register with:
+
+				a(href='/login' class='btn btn-default')
+					span(class='fa fa-user') Local Login
+				a(href='/signup' class='btn btn-default')
+					space(class='fa fa-user') Local Signup

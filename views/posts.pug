@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+  head
+    include includes/head
+body
+  header
+    include includes/nav
+  div(class='container')
+    div(class='row')
+      div(class='col-md-12')
+        each post in posts
+          div(class='well')
+            h4= post.posted.toLocaleDateString("en-US")
+            h1= post.title
+            h3= post.user.email
+            p= post.content

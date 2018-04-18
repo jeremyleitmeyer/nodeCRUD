@@ -5,7 +5,7 @@ const Post = require('../models/post');
 module.exports = (app) => {
 
   app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index.pug');
   });
 
   app.get('/profile', isLoggedIn, (req, res) => {
@@ -13,7 +13,7 @@ module.exports = (app) => {
     var posts = Post.find({
       'user.userId': req.user._id
     }, (err, posts) => {
-      res.render('profile.ejs', {
+      res.render('profile.pug', {
         user: req.user,
         posts: posts
       });
@@ -23,7 +23,7 @@ module.exports = (app) => {
   app.get('/posts', isLoggedIn, (req, res) => {
     console.log(req.params)
     var posts = Post.find({}, (err, posts) => {
-      res.render('posts.ejs', {
+      res.render('posts.pug', {
         posts: posts
       });
     });
