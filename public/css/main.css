@@ -8,5 +8,6 @@ body {
 }
 
 .posts {
-    
+    height: 400px;
+    overflow-y: auto;
 }
