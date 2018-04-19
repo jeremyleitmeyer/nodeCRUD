@@ -15,7 +15,7 @@ html(lang='en')
 	br
 	hr
 	div(class='row')
-		div(class='col-sm-6')
+		div(class='col-md-5 col-md-offset-1')
 			div(class='well')
 				h3
 					span(class='fa fa-user') Local
@@ -26,6 +26,6 @@ html(lang='en')
 					p= user.local.email
 					strong password:
 					p= user.local.password
-		div(class='col-sm-6 post-box')
+		div(class='col-md-5 post-box')
 			include includes/userPosts
 	

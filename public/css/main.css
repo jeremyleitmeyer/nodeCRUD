@@ -1,0 +1,8 @@
+body {
+    background-color: #586F7C;
+}
+
+.user-posts h3{
+    float: right;
+    padding: 15px;
+}

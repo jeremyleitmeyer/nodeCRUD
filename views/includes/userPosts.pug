@@ -1,8 +1,11 @@
-each post in posts
-  div(class='well')
-    h4= post.posted.toLocaleDateString("en-US")
-    h3= post.title
-    p= post.content
-  form(action='/posts/delete' method='post')
-    input(type='hidden' class='form-control' name='postId' value='#{post._id}')
-    button(type='submit' class='btn btn-warning btn-lg') Delete
+if posts.length < 0
+  p You have no posts !
+else
+  each post in posts.reverse()
+    div(class='well')
+      h4= post.posted.toLocaleDateString("en-US")
+      h3= post.title
+      p= post.content
+      form(action='/posts/delete' method='post')
+        input(type='hidden' class='form-control' name='postId' value='#{post._id}')
+        button(type='submit' class='btn btn-danger btn-md') Delete

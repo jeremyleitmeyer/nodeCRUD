@@ -21,7 +21,7 @@ module.exports = (app, passport) => {
 
   app.get('/signup', (req, res) => {
 
-    res.render('signup.ejs', {
+    res.render('signup.pug', {
       message: req.flash('signupMessage')
     });
   });

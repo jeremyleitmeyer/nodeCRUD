@@ -6,7 +6,7 @@ html(lang='en')
 		header
 			include includes/nav
 		div(class='container')
-			div(class='col-sm-6 col-sm-offset-3')
+			div(class='well col-sm-6 col-sm-offset-3')
 				h1
 					span(class='fa fa-sign-in') Login
 				if(messages)
@@ -14,7 +14,9 @@ html(lang='en')
 				br
 				include includes/loginForm
 				hr
-				p Need an account?
-					a(href='.signup') Signup
-				p Or go
+				p Need an account? 
+					|  
+					a(href='/signup') Signup
+				p Or go 
+					|  
 					a(href='/') Home

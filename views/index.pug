@@ -10,8 +10,12 @@ html(lang='en')
 				h1
 					span(class='fa fa-lock') A Node Blog with Pug(Jade)!
 				p Login or Register with:
-
-				a(href='/login' class='btn btn-default')
-					span(class='fa fa-user') Local Login
-				a(href='/signup' class='btn btn-default')
-					space(class='fa fa-user') Local Signup
+				div(class='btn-group')
+					a(href='/login' class='btn btn-success btn-outline-dark')
+						span(class='fa fa-user')  Local Login
+					a(href='/signup' class='btn btn-success btn-outline-dark')
+						space(class='fa fa-user')  Local Signup
+			div(class='row')
+				div(class='well col-lg-10 col-lg-offset-1')
+					h2 Welcome !
+					p 	This is a blog written mainly in JavaScript and Pug(Jade). The original goal of this blog was to see if I could write a basic blog in Nodejs from scratch. Now this blog is where I test new tech I am interested in ! Thanks for checking it out :)
